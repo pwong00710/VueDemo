@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://unpkg.com/vue"></script>    
+    <script src="./resources/vuejs/src/module/MyComponent.js" defer></script>
+    
+	<script type="text/x-template" id="myComponent3">
+		<div>This is my third component!</div>
+	</script>
+</head>
+
+<body>
+    <template id="myComponent2">
+        <div>This is my second [<span>{{ a }}</span>] component!</div>
+    </template>
+    
+	<template id="myComponent4">
+	    <table>
+	        <tr>
+	            <th colspan="2">
+				Child Component Data
+	            </th>
+	        </tr>
+	        <tr>
+	            <td>my name</td>
+	            <td>{{ myName }}</td>
+	            <td><input type="text" v-model="myName" /></td>	            
+	        </tr>
+	        <tr>
+	            <td>my age</td>
+	            <td>{{ myAge }}</td>
+	            <td><input type="text" v-model="myAge" /></td>
+	        </tr>
+	    </table>
+	</template>
+
+	<h1>App-1</h1>
+    <div id="app-1">
+        <!-- 3. Use components but some not rendered -->
+        <my-component1></my-component1>
+        <!--
+        <my-component2></my-component2>
+        <my-component3></my-component3>
+        -->
+    </div>
+    
+    <h1>App-2</h1>
+    <div id="app-2">
+        <!-- 3. Use components but some not rendered -->
+        <my-component1></my-component1>
+        <my-component2></my-component2>
+        <!--
+        <my-component3></my-component3>
+        -->
+    </div>
+    
+    <h1>App-3</h1>
+    <div id="app-3">
+        <!-- 3. Use components but some not rendered -->
+        <my-component1></my-component1>
+        <my-component2></my-component2>
+        <my-component3></my-component3>
+        <parent-component></parent-component>        
+    </div>
+
+    <h1>App-4</h1>
+    <div id="app-4">
+	    <table>
+	        <tr>
+	            <th colspan="2">Parent Component Data</td>
+	        </tr>
+	        <tr>
+	            <td>name</td>
+	            <td>{{ name }}</td>
+	            <td><input type="text" v-model="name" /></td>
+	        </tr>
+	        <tr>
+	            <td>age</td>
+	            <td>{{ age }}</td>
+	            <td><input type="text" v-model="age" /></td>
+	        </tr>
+	    </table>
+    	<my-component4 v-bind:my-name="name" v-bind:my-age="age"></my-component4>
+    	<my-component4 v-bind:my-name.sync="name" v-bind:my-age.sync="age"></my-component4>
+    	<my-component4 v-bind:my-name.once="name" v-bind:my-age.once="age"></my-component4>
+    </div>    
+    
+    <h1>App-0</h1>
+    <!-- Not render outside of Vue app -->
+    <!--
+    <my-component1></my-component1>
+    <my-component2></my-component2>
+    <my-component3></my-component3>
+    -->
+</body>
+    
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+<!-- Import Vue library -->
+<script src="https://unpkg.com/vue"></script>
+<!-- Q&A: import script from external file -->
+<script src="./resources/vuejs/src/module/MyApp.js" defer></script>
+
+<title>Vue Demo</title>
+
+</head>
+<body>
+<!-- Hello World App -->
+<div id="app">
+	<div>
+		<p>{{ message }}</p>
+	</div>
+</div>
+
+<div id="app-1">
+	<!-- Data Binding -->
+	<div>		
+		<p>{{ message }}</p>
+		<!--
+		<pre>{{ $data }}</pre>
+		-->
+	</div>
+	<div>
+		Enter a greeting: <input type="text" v-model="message">
+	</div>
+	<!-- Event Handling -->
+	<div>
+		<button v-on:click="sayHello">Hey there!</button>
+	</div>
+	<!-- Conditional Rendering using v-if -->
+	<div v-if="isLoggedIn">
+		Welcome to coligo!
+		<button @click="login" type="submit">Logout</button>
+	</div>
+	<div v-else>
+		<input type="text" placeholder="username"> <input
+			type="password" placeholder="password">
+		<button @click="login" type="submit">Login</button>
+	</div>
+	<!-- Conditional Rendering using v-show -->	
+	<div v-show="isLoggedIn">
+		Welcome to coligo!
+		<button @click="login" type="submit">Logout</button>
+	</div>
+	<div v-show="!isLoggedIn">
+		<input type="text" placeholder="username"> <input
+			type="password" placeholder="password">
+		<button @click="login" type="submit">Login</button>
+	</div>
+	<!-- Rendering Lists -->
+	<div>
+	  <ul>
+	    <li v-for="item in inventory">
+	      {{ item.name }} - ${{ item.price }}
+	    </li>
+	  </ul>
+	  <ul>
+	  	<!-- Q&A: read index of an array -->
+	    <li v-for="(item, index) in inventory">
+	      {{ index }} - {{ item.name }} - ${{ item.price }}
+	    </li>
+	  </ul>
+	</div>
+	<!-- Computed Properties -->
+	<div>
+	    <input type="number" v-model="x">
+    	result: {{ doubleX }}
+	</div>
+	<div>
+    	Guess a number between 1 and 10: <input type="number" v-model="userInput">
+    	<p>{{ userInput }} {{ randomNumber }}</p>
+    	<b>{{ result }}</b>
+	</div>	
+</div>
+
+<!-- Binding to HTML attribute -->	
+<div id="app-2">
+	<span v-bind:title="message"> Hover your mouse over me for a
+		few seconds to see my dynamically bound title! </span>
+</div>
+
+</body>
+</html>

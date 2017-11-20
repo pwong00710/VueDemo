@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="assets/css/custom.css" />
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script src="./resources/vuejs/src/module/MyRouter.EC6.js" defer></script>
+<script src="./resources/vuejs/src/module/MyRouter.js" defer></script>
+
+</head>
+
+<body>
+	<div id="app-1">
+		<h2>Router Basic - app01</h2>
+		<p>
+		    <router-link to="/home">Home</router-link>
+	        <ul>
+	            <li>
+	                <router-link to="/home/news">News</router-link>
+	            </li>
+	            <li>
+	                <router-link to="/home/message">Messages</router-link>
+	            </li>
+	        </ul>
+			<router-link to="/about">About</router-link>
+		</p>
+		<router-view></router-view>		
+	</div>
+	
+	<div id="app-2">
+		<h2>Router Basic - app02</h2>
+		<p>
+			<router-link to="/foo">Foo</router-link>
+			<!--
+			<ul>
+				<li>
+					<router-link to="/foo/profile">Profiles</router-link>
+				</li>
+				<li>
+					<router-link to="/foo/posts">Posts</router-link>
+				</li>
+			</ul>
+			-->
+			<router-link to="/bar">Bar</router-link>
+		</p>
+		<router-view></router-view>		
+	</div>
+
+	<div id="app-3">
+		<h2>Router Basic - app03</h2>		
+		<input type="text" v-model="id" />
+		<div>
+			<!--
+			<user-component v-bind:my-id="id"></user-component>
+			-->
+			<router-link v-bind:to="userlink" v-bind:my-id="id">User</router-link>
+			<router-view></router-view>
+		</div>
+	</div>
+
+	<template id="home">
+	<div>
+		<h1>Home</h1>
+		<p>{{msg}}</p>
+	</div>
+	</template>
+	
+	<template id="about">
+	<div>
+		<h1>About</h1>
+		<p>This is the tutorial about vue-router!</p>
+	</div>
+	</template>
+	
+	<template id="news">
+	    <ul>
+	        <li>News 01</li>
+	        <li>News 02</li>
+	        <li>News 03</li>
+	    </ul>
+	</template>
+
+	<template id="message">
+	    <ul>
+	        <li>Message 01</li>
+	        <li>Message 02</li>
+	        <li>Message 03</li>
+	    </ul>
+	</template>
+
+	<template id="user">
+		<div>
+			<h2>User {{ $route.params.id }}</h2>
+			{{ myId }} 
+	        <ul>
+				<!--
+				<li>
+					<router-link v-bind:to="'/user/'+id+'/profile'">Profiles</router-link>
+				</li>
+				-->
+				<li>
+					<router-link v-bind:to="{name: 'profile', params: { id: $route.params.id }}">Profiles</router-link>					
+				</li>
+				<li>
+					<router-link v-bind:to="{name: 'posts', params: { id: $route.params.id }}">Posts</router-link>
+				</li>
+			</ul>			
+			<router-view></router-view>
+		</div>
+	</template>
+
+	<template id="foo">
+		<div>
+			<ul>
+				<li>
+					<router-link to="/foo/profile">Profiles</router-link>
+				</li>
+				<li>
+					<router-link to="/foo/posts">Posts</router-link>
+				</li>
+			</ul>			
+			<router-view></router-view>
+		</div>
+	</template>	
+</body>
+
+</html>

@@ -4,25 +4,25 @@ var myComponent1 = Vue.extend({
         return {a : 1}
     },
 	template: '<div>This is my first component!</div>'
-})
+});
 
 var myComponent2 = Vue.extend({
     data: function(){
         return {a : 2}
     },	
 	template: '#myComponent2'
-})
+});
 
 var myComponent3 = Vue.extend({
     data: function(){
         return {a : 3}
     },
 	template: '#myComponent3'
-})
+});
 
 var Child = Vue.extend({
     template: '<p>This is a child component!</p>'
-})
+});
 
 var Parent = Vue.extend({
     // Use <child-component> in Parent template
@@ -31,7 +31,7 @@ var Parent = Vue.extend({
         // Register Child component, only used in Parent component
         'child-component': Child
     }
-})        
+});       
 
 // 2. Register component
 Vue.component('my-component1', myComponent1)
@@ -70,5 +70,6 @@ var app4 = new Vue({
             props: ['myName', 'myAge', 'syncMode']
         }
     }
-})
+});
+
 

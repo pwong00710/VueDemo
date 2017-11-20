@@ -5,7 +5,7 @@
 // These can be imported from other files
 const Foo = { template: '#foo' }
 const Bar = { template: '<div>bar</div>' }
-const UserProfile = { template: '<div>profile {{ $route.params.id }} </div>' }
+const UserProfile = { template: '#profile' }
 const UserPosts = { template: '<div>post {{ $route.params.id }} </div>' }
 
 // 2. Define some routes
@@ -54,10 +54,7 @@ const app2 = new Vue({
 }).$mount('#app-2')
 
 const User = {
-  data: function() {
-    return {id : 1}
-  },
-  props: ['myId'],
+  props: ['id'],
   template: '#user'
 }
 
@@ -65,7 +62,7 @@ const User = {
 
 const router3 = new VueRouter({
   routes: [
-    { name: 'user', path: '/user/:id', component: User,
+    { name: 'user', path: '/user/:id', component: User, props: true,
       children: [
         {
           // UserProfile will be rendered inside User's <router-view>

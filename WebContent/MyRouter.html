@@ -56,7 +56,7 @@
 			<!--
 			<user-component v-bind:my-id="id"></user-component>
 			-->
-			<router-link v-bind:to="userlink" v-bind:my-id="id">User</router-link>
+			<router-link v-bind:to="userlink">User</router-link>
 			<router-view></router-view>
 		</div>
 	</div>
@@ -93,8 +93,9 @@
 
 	<template id="user">
 		<div>
+			<!--
 			<h2>User {{ $route.params.id }}</h2>
-			{{ myId }} 
+			--> 
 	        <ul>
 				<!--
 				<li>
@@ -102,13 +103,23 @@
 				</li>
 				-->
 				<li>
-					<router-link v-bind:to="{name: 'profile', params: { id: $route.params.id }}">Profiles</router-link>					
+					<router-link v-bind:to="{name: 'profile', params: { id: id }}">Profiles</router-link>					
 				</li>
 				<li>
-					<router-link v-bind:to="{name: 'posts', params: { id: $route.params.id }}">Posts</router-link>
+					<router-link v-bind:to="{name: 'posts', params: { id: id }}">Posts</router-link>
 				</li>
 			</ul>			
 			<router-view></router-view>
+		</div>
+	</template>
+	
+	<template id="profile">
+		<div>
+			profile {{ $route.params.id }}
+		    <p>当前路径：{{$route.path}}</p>
+		    <p>当前参数：{{$route.params}}</p>		    
+		    <p>路由名称：{{$route.name}}</p>		    
+		    <p>路由查询参数：{{$route.query}}</p>
 		</div>
 	</template>
 
@@ -123,7 +134,7 @@
 				</li>
 			</ul>			
 			<router-view></router-view>
-		</div>
+		</div>		
 	</template>	
 </body>
 

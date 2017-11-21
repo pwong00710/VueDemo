@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" href="css/style.css" />
+<style>
+	#grid-template,
+	#dialog-template {
+		display: none;
+	}
+</style>	
+
+<script src="https://unpkg.com/vue"></script>
+<!-- Import script from external file -->
+<script src="./resources/vuejs/src/module/MyCRUD.js" defer></script>
+
+<title>Vue CRUD Demo</title>
+
+</head>
+<body>
+
+<div id="app">
+    <div class="container">
+        <div class="form-group">
+            <label>Search</label>
+            <input type="text" class="search-input" v-model="searchQuery" />
+        </div>
+
+    </div>
+    <div class="container">
+        <simple-grid :data-list="people" :columns="columns" :search-key="searchQuery">
+        </simple-grid>
+    </div>
+</div>
+
+<template id="grid-template">
+    <table>
+        <thead>
+            <tr>
+                <th v-for="col in columns">
+                    {{ col.name | capitalize }}
+                </th>
+                <th>
+                    Delete
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="(user, index) in filteredUsers">
+                <td v-for="col in columns">
+                    {{ user[col.name] }}
+                </td>
+                <td class="text-center">
+                    <button @click="deleteItem(index)">delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</template>
+
+
+
+</body>
+</html>

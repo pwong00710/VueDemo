@@ -35,31 +35,66 @@
 </div>
 
 <template id="grid-template">
-    <table>
-        <thead>
-            <tr>
-                <th v-for="col in columns">
-                    {{ col.name | capitalize }}
-                </th>
-                <th>
-                    Delete
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="(user, index) in filteredUsers">
-                <td v-for="col in columns">
-                    {{ user[col.name] }}
-                </td>
-                <td class="text-center">
-                    <button @click="deleteItem(index)">delete</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+	<div>
+	    <table>
+	        <thead>
+	            <tr>
+	                <th v-for="col in columns">
+	                    {{ col.name | capitalize }}
+	                </th>
+	                <th>
+	                    Delete
+	                </th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <tr v-for="(user, index) in filteredUsers">
+	                <td v-for="col in columns">
+	                    {{ user[col.name] }}
+	                </td>
+	                <td class="text-center">
+	                    <button @click="deleteItem(index)">delete</button>
+	                </td>
+	            </tr>
+	        </tbody>
+	    </table>
+	    
+	    <div class="container">
+	        <button class="btn" @click="openNewItemDialog('Create new item')">Create</button>
+	    </div>
+	    
+		<modal-dialog :mode="mode" :title="title" :fields="columns" :item="item"></modal-dialog>
+	</div>    
 </template>
 
-
+<template id="dialog-template">	
+	<div class="dialogs">
+		<div class="dialog" v-bind:class="{ 'dialog-active': show }">
+			<div class="dialog-content">
+				<header class="dialog-header">
+					<h1 class="dialog-title">{{ title }}</h1>
+				</header>
+				
+                <div v-for="field in fields" class="form-group" >
+                        <label>{{ field.name }}</label>
+                        <select v-if="field.dataSource" v-model="item[field.name]">
+                            <option v-for="opt in field.dataSource" :value="opt">{{ opt }}</option>
+                        </select>
+                        <input v-else type="text" v-model="item[field.name]">
+                </div>
+                
+				<footer class="dialog-footer">
+					<div class="form-group">
+						<label></label>
+						<button class="btn-save" v-on:click="save">Save</button>						
+						<button class="btn-close" v-on:click="close">Close</button>
+					</div>
+				</footer>
+			</div>
+		</div>
+		<div class="dialog-overlay"></div>
+	</div>
+</template>
 
 </body>
 </html>

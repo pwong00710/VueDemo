@@ -50,7 +50,15 @@
 	        <tbody>
 	            <tr v-for="(user, index) in filteredUsers">
 	                <td v-for="col in columns">
+	                	<!--
 	                    {{ user[col.name] }}
+	                    -->
+		                <span v-if="col.isKey">
+		                	<a href="javascript:void(0)" @click="openEditItemDialog(user[col.name])">{{user[col.name]}}</a>
+		                </span>
+		                <span v-else>
+		                	{{user[col.name]}}
+		                </span>
 	                </td>
 	                <td class="text-center">
 	                    <button @click="deleteItem(index)">delete</button>
@@ -63,7 +71,7 @@
 	        <button class="btn" @click="openNewItemDialog('Create new item')">Create</button>
 	    </div>
 	    
-		<modal-dialog :mode="mode" :title="title" :fields="columns" :item="item"></modal-dialog>
+		<modal-dialog :mode="mode" :title="title" :item="item" :fields="columns" v-on:create-item="createItem" v-on:update-item="updateItem">
 	</div>    
 </template>
 
@@ -76,11 +84,11 @@
 				</header>
 				
                 <div v-for="field in fields" class="form-group" >
-                        <label>{{ field.name }}</label>
-                        <select v-if="field.dataSource" v-model="item[field.name]">
-                            <option v-for="opt in field.dataSource" :value="opt">{{ opt }}</option>
-                        </select>
-                        <input v-else type="text" v-model="item[field.name]">
+				    <label>{{ field.name }}</label>
+				    <select v-if="field.dataSource" v-model="item[field.name]" :disabled="mode === 2 && field.isKey">
+				            <option v-for="opt in field.dataSource" :value="opt">{{ opt }}</option>
+				    </select>
+				    <input v-else type="text" v-model="item[field.name]" :disabled="mode === 2 && field.isKey">
                 </div>
                 
 				<footer class="dialog-footer">

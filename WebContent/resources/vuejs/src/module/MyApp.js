@@ -30,7 +30,7 @@ var app1 = new Vue({
 	},
 	methods : {
 		sayHello : function() {
-			alert('Hey there, ' + this.name);
+			alert('Hey there, ' + this.name);			
 		},
 		login : function() {
 			// 'this' refers to the vm instance
